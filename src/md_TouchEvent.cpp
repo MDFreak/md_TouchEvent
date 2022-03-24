@@ -11,6 +11,15 @@
 //constructor prefill private members
 md_TouchEvent::md_TouchEvent(XPT2046_Touchscreen *pTouch): _touch(pTouch) { }
 
+/*
+    void md_TouchEvent::setCalibration(uint16_t cxmin, uint16_t cxmax, uint16_t cymin, uint16_t cymax)
+      {
+        _tsMinX = cxmin;
+        _tsMinY = cymin;
+        _tsMaxX = cxmax;
+        _tsMaxY = cymax;
+      }
+ */
 bool md_TouchEvent::getTouchPos(TS_Point *pP, TS_Point *pRaw)
   {
     bool     erg = false;

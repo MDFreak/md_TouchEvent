@@ -38,7 +38,6 @@
   #include <Adafruit_GFX.h> //Grafik Bibliothek
   #include <Adafruit_ILI9341.h> // Display Treiber
 
-
   #define MOVETRESHOLD 10 //define the minimal movement to detect a move
   #define SWIPEX 500 //define a minimum X-movement to detect an x swipe
   #define SWIPEY 700 //define a minimum Y-movement to detect an y swipe
@@ -46,16 +45,17 @@
   #define DOUBLECLICK 500 //define a minimum time between two clicks to detect a doubleclick
   #define SCREENX 240 //screen resolution in pixels
   #define SCREENY 320 //screen resolution in pixels
-
-  // for Touchscreen
-  // Parameter für Touchscreen
-  #define MINPRESSURE 10 //pressure to detect touch
-  #ifndef TS_MINX
-      #define TS_MINX 230 //minimal x return value
-      #define TS_MINY 350 //minimal y return value
-      #define TS_MAXX 3700  //maximal x return value
-      #define TS_MAXY 3900 //maximal y return value
-    #endif
+    /*
+      // for Touchscreen
+      // Parameter für Touchscreen
+      #define MINPRESSURE 10 //pressure to detect touch
+      #ifndef TS_MINX
+          #define TS_MINX 230 //minimal x return value
+          #define TS_MINY 350 //minimal y return value
+          #define TS_MAXX 3700  //maximal x return value
+          #define TS_MAXY 3900 //maximal y return value
+        #endif
+     */
 //496
 //262
 //3997
@@ -82,6 +82,8 @@
         //initializer we get a pointer to the XPT2046 driver
         md_TouchEvent(XPT2046_Touchscreen* touch);
         //md_TouchEvent(md_touch *pTouch);
+
+        void setCalibration(uint16_t cxmin, uint16_t cxmax, uint16_t cymin, uint16_t cymax);
 
         /* this is the most simple function which should be called in the main loop
            position is read, checked with orientation and calibrated
@@ -206,11 +208,11 @@
         uint16_t  _clickLong = CLICKLONG; //define a minimum time to detect a long click
         uint16_t  _dblClick = DOUBLECLICK; //define a minimum time between two clicks to detect a doubleclick
 
-        uint16_t  _minPress = MINPRESSURE; //pressure to detect touch
-        uint16_t  _tsMinX = TS_MINX; //minimal x return value
-        uint16_t  _tsMinY = TS_MINY; //minimal y return value
-        uint16_t  _tsMaxX = TS_MAXX;  //maximal x return value
-        uint16_t  _tsMaxY = TS_MAXY; //maximal y return value
+        uint16_t  _minPress = 10; //pressure to detect touch
+        uint16_t  _tsMinX   = 230; //minimal x return value
+        uint16_t  _tsMinY   = 350; //minimal y return value
+        uint16_t  _tsMaxX   = 3700;  //maximal x return value
+        uint16_t  _tsMaxY   = 3900; //maximal y return value
         uint8_t   _autoWhich;
 
         void(*_onTouchDown)(TS_Point p) = NULL;
